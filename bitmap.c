@@ -52,7 +52,7 @@ void fill(bitmap mybitmap, int x1, int x2, int y1, int y2, color_t color)
     
     for(int i = 0; i <= diff; i++)
     {
-        mybitmap.pixels[start + diff] = color;
+        mybitmap.pixels[start + i] = color;
     }
 }
 
