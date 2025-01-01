@@ -1,4 +1,6 @@
 #include "bitmap.h"
+#include <stdio.h>
+
 
 
 
@@ -28,29 +30,17 @@ void set_pixel(bitmap mybitmap, int x , int y, color_t color)
     mybitmap.pixels[y* mybitmap.width + x] = color;
 }
 
-void fill(bitmap mybitmap, int x1, int x2, int y1, int y2, color_t color)
+void fill(bitmap mybitmap, int x1, int y1, int x2, int y2, color_t color)
 {
-    /*
-    // fill starting from (x1, y1) to (x2, y2)
-    
-    int pos1 = y1*mybitmap.width + x1;
-    // int pos2 = y2*mybitmap.width + x2;
-    int diff = (y2*mybitmap.height + x2) - (y1*mybitmap.height + x1);
+    int start = y1*mybitmap.width + x1;
+    int end = y2*mybitmap.width + x2;
 
-    for(int pos = 0; pos <= diff; pos++)
+    if(x1 < 0 || y1 < 0 || x2 > mybitmap.width || y2 > mybitmap.height || x1 > x2 || y1 > y2)
     {
-        mybitmap.pixels[pos1 + pos] = color;
-    }
-    */
-    if(x1 < 0 || y1 < 0 || x1 > mybitmap.width || y1 > mybitmap.height || x2 < 0 || y2 < 0 || x2 > mybitmap.width || y2 > mybitmap.height || y2 < y1 || x2 < x1)
-    {
-        printf("bad arguments");
         return;
     }
-    int start = y1*mybitmap.width + x1;
-    int diff = (y2*mybitmap.width + x2) - start;
-    
-    for(int i = 0; i <= diff; i++)
+    int diff = end - start;
+    for(int i = 0; i < diff; i++)
     {
         mybitmap.pixels[start + i] = color;
     }
@@ -130,7 +120,7 @@ void write_pixeldata(bitmap mybitmap, FILE* file)
     // starting from the bottom of the image to the top
     for(int y = mybitmap.height - 1; y >= 0; y--)
     {
-        for(int x = 0; x < mybitmap.height; x++)
+        for(int x = 0; x < mybitmap.width; x++)
         {
             color_t pixel = mybitmap.pixels[y*mybitmap.width + x];
 

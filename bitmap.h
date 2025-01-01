@@ -19,7 +19,7 @@ void free_bitmap(bitmap bitmap_to_free);
 
 // drawing on the bitmap
 void set_pixel(bitmap bitmap, int x, int y, color_t color);
-void fill(bitmap bitmap, int x1, int x2, int y1, int y2, color_t color);
+void fill(bitmap bitmap, int x1, int y1, int x2, int y2, color_t color);
 
 
 // writing to file
